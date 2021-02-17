@@ -22,14 +22,13 @@ namespace nhOmega.GameTracker.Data.SQLite.Repositories
 
         public async Task<Game> Get(int id)
         {
-            var entity = await Context.Games.FindAsync(id);
-
+            var entity = await Context.Games.Include(game => game.Image).FirstAsync(game => game.Id == id);
             return entity.ToModel();
         }
 
         public async Task<List<Game>> GetAll()
         {
-            return await Context.Games.Select(game => game.ToModel()).ToListAsync();
+            return await Context.Games.Include(game => game.Image).Select(game => game.ToModel()).ToListAsync();
         }
 
         public async Task Create(Game game)
