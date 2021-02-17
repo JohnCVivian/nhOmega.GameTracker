@@ -14,6 +14,8 @@ namespace nhOmega.GameTracker.Core.Models
 
         public GameImage Image { get; set; }
 
+        public string Comment { get; set; }
+
         public DateTime Date { get; set; }
     }
 }

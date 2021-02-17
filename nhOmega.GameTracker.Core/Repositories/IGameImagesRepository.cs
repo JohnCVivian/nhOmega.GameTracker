@@ -8,9 +8,11 @@ namespace nhOmega.GameTracker.Core.Repositories
 {
     public interface IGameImagesRepository
     {
+        Task<GameImage> Get(int id);
+
         Task Create(GameImage gameImage);
 
-        Task<GameImage> Get(int id);
+        Task Update(GameImage gameImage);
 
         Task Delete(int id);
     }
