@@ -1,8 +1,10 @@
-﻿using nhOmega.GameTracker.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using nhOmega.GameTracker.Core.Models;
 using nhOmega.GameTracker.Core.Repositories;
 using nhOmega.GameTracker.Data.SQLite.Models.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,9 +27,9 @@ namespace nhOmega.GameTracker.Data.SQLite.Repositories
             return entity.ToModel();
         }
 
-        public Task<List<Game>> GetAll()
+        public async Task<List<Game>> GetAll()
         {
-            throw new NotImplementedException();
+            return await Context.Games.Select(game => game.ToModel()).ToListAsync();
         }
 
         public async Task Create(Game game)
