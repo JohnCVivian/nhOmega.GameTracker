@@ -5,7 +5,7 @@ using System.Text;
 
 namespace nhOmega.GameTracker.Data.SQLite.Models
 {
-    public class Game
+    internal class Game
     {
         [Key]
         public int Id { get; set; }

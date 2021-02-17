@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace nhOmega.GameTracker.Core.Repositories
 {
-    public interface IGamesRepository
+    public interface IGameImagesRepository
     {
-        Task Create(Game gameImage);
+        Task Create(GameImage gameImage);
 
-        Task<Game> Get(int id);
+        Task<GameImage> Get(int id);
 
         Task Delete(int id);
     }

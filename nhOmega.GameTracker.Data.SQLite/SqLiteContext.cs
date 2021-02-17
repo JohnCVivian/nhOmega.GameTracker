@@ -8,8 +8,8 @@ namespace nhOmega.GameTracker.Data.SQLite
 {
     public class SqLiteContext : DbContext
     {
-        public DbSet<Game> Games { get; set; }
-        public DbSet<GameImage> GameImages { get; set; }
+        internal DbSet<Game> Games { get; set; }
+        internal DbSet<GameImage> GameImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
