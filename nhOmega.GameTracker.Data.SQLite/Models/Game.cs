@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace nhOmega.GameTracker.Data.SQLite.Models
+{
+    public class Game
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        public int StateId { get; set; }
+
+        public int ImageId { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public string Comment { get; set; }
+    }
+}
