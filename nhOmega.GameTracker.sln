@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nhOmega.GameTracker.Web", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nhOmega.GameTracker.Core", "nhOmega.GameTracker.Core\nhOmega.GameTracker.Core.csproj", "{E4B4BA03-6C12-4F86-A104-DFF3D2E293F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nhOmega.GameTracker.Data.SQLight", "nhOmega.GameTracker.Data.SQLight\nhOmega.GameTracker.Data.SQLight.csproj", "{D62A7EF8-C637-4E51-A630-EC30C46C3C38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nhOmega.GameTracker.Data.SQLite", "nhOmega.GameTracker.Data.SQLite\nhOmega.GameTracker.Data.SQLite.csproj", "{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{E4B4BA03-6C12-4F86-A104-DFF3D2E293F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4B4BA03-6C12-4F86-A104-DFF3D2E293F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4B4BA03-6C12-4F86-A104-DFF3D2E293F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D62A7EF8-C637-4E51-A630-EC30C46C3C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D62A7EF8-C637-4E51-A630-EC30C46C3C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D62A7EF8-C637-4E51-A630-EC30C46C3C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D62A7EF8-C637-4E51-A630-EC30C46C3C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
