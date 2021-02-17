@@ -26,6 +26,8 @@ namespace nhOmega.GameTracker.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSqLiteDbContext(Configuration);
+            services.AddDataRepositories();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,10 +42,7 @@ namespace nhOmega.GameTracker.Core
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

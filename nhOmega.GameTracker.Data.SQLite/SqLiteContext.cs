@@ -11,6 +11,11 @@ namespace nhOmega.GameTracker.Data.SQLite
         internal DbSet<Game> Games { get; set; }
         internal DbSet<GameImage> GameImages { get; set; }
 
+        public SqLiteContext(DbContextOptions<SqLiteContext> options) : base(options)
+        {
+
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Game>().ToTable("Games");

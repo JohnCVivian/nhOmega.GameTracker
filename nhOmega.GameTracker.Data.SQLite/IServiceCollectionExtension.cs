@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using nhOmega.GameTracker.Core.Repositories;
+using nhOmega.GameTracker.Data.SQLite.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,8 +30,10 @@ namespace nhOmega.GameTracker.Data.SQLite
             return services;
         }
 
-        public static IServiceCollection AddSqLiteAutoMapper(this IServiceCollection services, IConfiguration configuration = null)
+        public static IServiceCollection AddDataRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IGamesRepository, GamesRepository>();
+
             return services;
         }
     }

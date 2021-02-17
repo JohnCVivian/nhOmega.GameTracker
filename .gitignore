@@ -338,3 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/nhOmega.GameTracker.Web/nhOmega.GameTracker.db

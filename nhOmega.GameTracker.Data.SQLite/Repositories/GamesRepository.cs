@@ -35,7 +35,7 @@ namespace nhOmega.GameTracker.Data.SQLite.Repositories
         public async Task Create(Game game)
         {
             var entity = game.ToDBModel();
-
+            entity.Date = DateTime.UtcNow;
             Context.Games.Add(entity);
             await Context.SaveChangesAsync();
         }
