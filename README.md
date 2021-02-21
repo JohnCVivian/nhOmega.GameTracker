@@ -10,8 +10,10 @@ Command Line interface
 nhOmega.GameTracker.CLI
 
 1) dotnet restore
+
 	To fetch the relevant nuget packages
 2) dontnet build 
+
 	To build the solution
 
 To generate/update the database
