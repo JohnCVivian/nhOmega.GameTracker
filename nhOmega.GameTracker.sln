@@ -5,9 +5,14 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nhOmega.GameTracker.Web", "nhOmega.GameTracker.Web\nhOmega.GameTracker.Web.csproj", "{18486E37-347E-42FE-9F40-A97C7A40BBED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nhOmega.GameTracker.Core", "nhOmega.GameTracker.Core\nhOmega.GameTracker.Core.csproj", "{E4B4BA03-6C12-4F86-A104-DFF3D2E293F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nhOmega.GameTracker.Core", "nhOmega.GameTracker.Core\nhOmega.GameTracker.Core.csproj", "{E4B4BA03-6C12-4F86-A104-DFF3D2E293F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nhOmega.GameTracker.Data.SQLite", "nhOmega.GameTracker.Data.SQLite\nhOmega.GameTracker.Data.SQLite.csproj", "{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nhOmega.GameTracker.Data.SQLite", "nhOmega.GameTracker.Data.SQLite\nhOmega.GameTracker.Data.SQLite.csproj", "{CEA233C7-EFD7-4B10-ABAA-3CAA1984EED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{0BEBC3AB-0020-4C43-9068-7844698DADF9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
