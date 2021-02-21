@@ -14,6 +14,6 @@ nhOmega.GameTracker.CLI
 2) dontnet build\
 	To build the solution
 
-To generate/update the database
+To generate/update the database\
 dotnet ef database update
 
