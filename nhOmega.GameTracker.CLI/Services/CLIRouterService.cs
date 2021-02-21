@@ -15,7 +15,7 @@ namespace nhOmega.GameTracker.CLI.Services
 
         public List<ICLIEndpoint> Endpoints { get; }
 
-        public CLIRouterService(ArgumentsService argumentsService)
+        public CLIRouterService(ArgumentsService argumentsService, IServiceProvider serviceProvider)
         {
             SystemSettings = argumentsService.SystemSettings;
             Commands = argumentsService.Commands;
@@ -25,7 +25,8 @@ namespace nhOmega.GameTracker.CLI.Services
             Endpoints = new List<ICLIEndpoint>
             {
                 HelpEndpoint,
-                new GameEndpoint()
+                serviceProvider.GetService(typeof(GameEndpoint)) as ICLIEndpoint,
+                serviceProvider.GetService(typeof(DatabaseEndpoint)) as ICLIEndpoint
             };
         }
 

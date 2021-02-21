@@ -1,22 +1,24 @@
 ﻿using nhOmega.GameTracker.CLI.Model;
+using nhOmega.GameTracker.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nhOmega.GameTracker.CLI.Endpoints
 {
     public class GameEndpoint : ICLIEndpoint
     {
-        public readonly string _command = "game";
+        private readonly string _command = "game";
+        private List<string> Commands;
+        private IGamesRepository GamesRepository { get; }
 
         public string CommandName => _command;
 
-        private List<string> Commands;
-        public SystemSetting SystemSettings { get; private set; }
-
-        public GameEndpoint()
+        public GameEndpoint(IGamesRepository gamesRepository)
         {
+            GamesRepository = gamesRepository;
         }
 
 
@@ -26,51 +28,84 @@ namespace nhOmega.GameTracker.CLI.Endpoints
             return this;
         }
 
-        public void PrintHelp(string subCommand = null)
+        public Task<string> PrintHelp(string subCommand = null)
         {
-            throw new NotImplementedException();
+            StringBuilder helpMessage = new StringBuilder();
+            helpMessage.AppendLine("Game command to list/modfy the games collection");
+            helpMessage.AppendLine();
+
+            switch (subCommand?.ToLowerInvariant())
+            {
+                case "list":
+                    helpMessage.AppendLine("List all the games tracked");
+                    break;
+                case "add":
+                    helpMessage.AppendLine("adds a game to be tracked");
+                    helpMessage.AppendLine("Usage");
+                    helpMessage.AppendLine("\tgame add [JSON]");
+                    helpMessage.AppendLine();
+                    helpMessage.AppendLine("\tExample:");
+                    helpMessage.AppendLine("\tgame add \"{'name':'DOOG', 'state':'Completed'}\"");
+                    break;
+                case null:
+                default:
+                    helpMessage.Append(PrintCommandList());
+                    break;
+            }
+
+            return Task.FromResult(helpMessage.ToString());
         }
 
         public StringBuilder PrintCommandList()
         {
             StringBuilder commandList = new StringBuilder();
             commandList.AppendLine("\tGame commands");
-            commandList.AppendLine("\t\tgame list\t\tList games");
-            commandList.AppendLine("\t\tgame add\t\tAdd game");
+            commandList.AppendLine("\t\tgame list\tList games");
+            commandList.AppendLine("\t\tgame add\tAdd game");
             return commandList;
         }
 
-        public void Run()
+        public async Task<string> RunAsync()
         {
+            string result;
             string subcommand = Commands.ElementAtOrDefault(1);
-
-            if (subcommand is null)
-            {
-                PrintHelp();
-                return;
-            }
 
             switch(subcommand?.ToLowerInvariant())
             {
                 case "list":
-                    ListGames();
+                    result = await ListGamesAsync();
                     break;
                 case "add":
-                    AddGame();
+                    result = await AddGame();
                     break;
                 case null:
                 default:
-                    PrintHelp();
+                    result = await PrintHelp();
                     break;
             }
+
+            return result;
         }
 
-        private void ListGames()
+        private async Task<string> ListGamesAsync()
         {
-            throw new NotImplementedException();
+            StringBuilder results = new StringBuilder();
+            results.AppendLine("Your Games are:");
+            List<Core.Models.Game> games = await GamesRepository.GetAll();
+            foreach(var game in games)
+            {
+                results.AppendLine($"\t{game.Name}");
+                results.AppendLine($"\t  State: {game.State}");
+                results.AppendLine($"\t  Updated: {game.Date}");
+                results.AppendLine($"\t  Comment:");
+                results.AppendLine($"\t\t{game.Comment}");
+                results.AppendLine();
+            }
+
+            return results.ToString();
         }
 
-        private void AddGame()
+        private Task<string> AddGame()
         {
             throw new NotImplementedException();
         }

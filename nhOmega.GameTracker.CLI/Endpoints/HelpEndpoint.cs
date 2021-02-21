@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nhOmega.GameTracker.CLI.Endpoints
 {
@@ -28,7 +29,7 @@ namespace nhOmega.GameTracker.CLI.Endpoints
             return this;
         }
 
-        public void PrintHelp(string subCommand = null)
+        public Task<string> PrintHelp(string subCommand = null)
         {
             StringBuilder helpMessage = new StringBuilder();
             helpMessage.AppendLine("Welcome to nhOmega GameTracker");
@@ -44,10 +45,13 @@ namespace nhOmega.GameTracker.CLI.Endpoints
             
             foreach(ICLIEndpoint endpoint in _router.Endpoints)
             {
-                helpMessage.Append(endpoint.PrintCommandList());
+                //if (!endpoint.CommandName.Equals("database"))
+                //{
+                    helpMessage.Append(endpoint.PrintCommandList());
+                //}
             }
 
-            Console.Write(helpMessage.ToString());
+            return Task.FromResult(helpMessage.ToString());
         }
 
         public StringBuilder PrintCommandList()
@@ -58,14 +62,20 @@ namespace nhOmega.GameTracker.CLI.Endpoints
             return commandList;
         }
 
-        public void Run()
+        public async Task<string> RunAsync()
         {
+            string message;
             if (string.IsNullOrEmpty(MissingCommand) && Commands.Count > 1)
             {
                 ICLIEndpoint endpoint = _router.Route(Commands[1]);
-                endpoint.PrintHelp(Commands.ElementAtOrDefault(2));
+                message = await endpoint.PrintHelp(Commands.ElementAtOrDefault(2));
+            } 
+            else
+            {
+                message = await PrintHelp();
             }
-            PrintHelp();
+
+            return message;
         }
     }
 }

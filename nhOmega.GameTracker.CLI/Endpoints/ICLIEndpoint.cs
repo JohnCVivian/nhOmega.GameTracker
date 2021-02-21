@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nhOmega.GameTracker.CLI.Endpoints
 {
     public interface ICLIEndpoint
     {
-        public string CommandName { get; }
-        public ICLIEndpoint Init(List<string> commands);
-        public void Run();
-        public void PrintHelp(string subCommand = null);
-        public StringBuilder PrintCommandList();
+        string CommandName { get; }
+        ICLIEndpoint Init(List<string> commands);
+        Task<string> RunAsync();
+        Task<string> PrintHelp(string subCommand = null);
+        StringBuilder PrintCommandList();
     }
 }

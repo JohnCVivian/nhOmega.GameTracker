@@ -3,31 +3,60 @@ using nhOmega.GameTracker.CLI.Model;
 using nhOmega.GameTracker.CLI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using nhOmega.GameTracker.Data.SQLite;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace nhOmega.GameTracker.CLI
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
-            var serviceProvider = ConfigureServices(args);
+            IHost host = CreateHostBuilder(args).Build();
 
-            var router = serviceProvider.GetService<CLIRouterService>();
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var router = serviceScope.ServiceProvider.GetRequiredService<CLIRouterService>();
 
-            ICLIEndpoint endpoint = router.Route();
+                ICLIEndpoint endpoint = router.Route();
 
-            endpoint.Run();
+                string result = await endpoint.RunAsync();
+
+                Console.Write(result);
+            }
 
         }
 
-        private static ServiceProvider ConfigureServices(string[] args)
-        {
-            var services = new ServiceCollection();
-            services.AddSingleton(new ArgumentsService(args));
-            services.AddSingleton<CLIRouterService>();
+        public static IHostBuilder CreateHostBuilder(string[] args) {
+            return Host.CreateDefaultBuilder(args).ConfigureServices((_, services) => {
+                services.AddSingleton(new ArgumentsService(args));
+                services.AddSingleton<CLIRouterService>();
 
-            return services.BuildServiceProvider();
+                services.AddSqLiteDbContext();
+
+                services.AddDataRepositories();
+
+                // Rather than using reflection we just regester the endpoints here
+                services.AddTransient<GameEndpoint>();
+                services.AddTransient<DatabaseEndpoint>();
+            }).ConfigureLogging(logging => {
+                logging.AddFilter((provider, category, logLevel) =>
+                {
+                    if (provider.Contains("ConsoleLoggerProvider")
+                        && category.Contains("Microsoft")
+                        && logLevel >= LogLevel.Warning)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                });
+            }).UseConsoleLifetime();
         }
     }
 }
