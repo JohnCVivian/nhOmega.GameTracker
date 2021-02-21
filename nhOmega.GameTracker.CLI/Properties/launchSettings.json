@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "nhOmega.GameTracker.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "help game add"
+    }
+  }
+}
