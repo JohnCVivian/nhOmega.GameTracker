@@ -16,7 +16,7 @@ namespace nhOmega.GameTracker.Data.SQLite.Models
 
         public int State { get; set; }
 
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
 
         [ForeignKey("ImageId")]
         public virtual GameImage Image { get; set; }

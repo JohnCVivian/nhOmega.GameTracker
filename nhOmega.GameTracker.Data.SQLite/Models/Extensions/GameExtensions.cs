@@ -13,7 +13,7 @@ namespace nhOmega.GameTracker.Data.SQLite.Models.Extensions
             {
                 Id = game.Id,
                 Name = game.Name,
-                ImageId = game.Image?.Id ?? 1,
+                ImageId = game.Image?.Id,
                 State = game.State,
                 Comment = game.Comment,
                 Date = game.Date
@@ -26,7 +26,7 @@ namespace nhOmega.GameTracker.Data.SQLite.Models.Extensions
             {
                 Id = game.Id,
                 Name = game.Name,
-                Image = game.Image?.ToModel() ?? new App.GameImage { Id = game.ImageId},
+                Image = game.Image?.ToModel(),
                 State = game.State,
                 Comment = game.Comment,
                 Date = game.Date
